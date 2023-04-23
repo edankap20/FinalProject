@@ -6,6 +6,7 @@ import SignInView from '@/views/SignInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import UserStore from '@/stores/user.js'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -38,6 +39,7 @@ const router = createRouter({
     },
   ]
 })
+
 
 router.beforeEach((to) => {
   const useUserStore = UserStore()
