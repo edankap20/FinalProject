@@ -25,5 +25,13 @@ export default defineStore('userStore', {
           if (user) this.user = user;
         },
         //método de iniciar sesión que lo tomo de la doc de SupaBase
+        async signIn({ email, password}) {
+            const { data: { user }, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+              });
+              if (error) throw error;
+              if (user) this.user = user;
+        }
     },
 })
