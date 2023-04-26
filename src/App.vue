@@ -1,6 +1,6 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import userStore from '@/stores/user.js'
 export default {
   name: "App",
@@ -8,14 +8,36 @@ export default {
     RouterView,
     RouterLink,
   },
-  methods: {
-    ...mapActions(userStore, ['fetchUser'])
+  computed: {
+    ...mapState(userStore, ['user'])
   },
+  methods: {
+    ...mapActions(userStore, ['fetchUser']),
+    _checkUserExists() {
+      console.log(this.user)
+      if(this.user) {
+        this.$router.push({ path: '/'});
+      } else {
+        this.router.push({ path: '/auth/sign-in'})
+      }
+    }
+  },
+
   async created() {
-    await this.fetchUser()
+    try {
+      await this.fetchUser() //para que coja el usuario de Supabase y lo guarde en Store de Use.js
+      this._checkUserExists()
+    } catch (e) {
+      console.error(e);
+      this._checkUserExists()
+    }
+  },
+  watch: {
+    user() {
+      this._checkUserExists()
+    },
   }
 }
-
 </script>
 
 <template>

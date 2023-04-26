@@ -42,8 +42,8 @@ const router = createRouter({
 
 
 router.beforeEach((to) => {
-  const useUserStore = UserStore()
-  const isLoginIn = useUserStore.user !== null;
+  const useUserStore = UserStore() //me traigo la función
+  const isLoginIn = useUserStore.user !== null; //de mi Store mira el objeto user de mi Estado y me dices si es diferente de null: Tengo usuario
 
   if(!isLoginIn && to.name !== 'signIn' && to.name !== 'signUp' && to.name !== 'contact') {
     return {name: 'signIn'}
