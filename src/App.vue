@@ -1,21 +1,7 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import { mapActions } from 'pinia';
-import userStore from '@/stores/user.js'
 export default {
   name: "App",
-  components: {
-    RouterView,
-    RouterLink,
-  },
-  methods: {
-    ...mapActions(userStore, ['fetchUser'])
-  },
-  async created() {
-    await this.fetchUser()
-  }
 }
-
 </script>
 
 <template>
