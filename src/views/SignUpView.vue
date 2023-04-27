@@ -1,8 +1,7 @@
 <template>
-    <h1>Sign Up View (Hijo de Auth)</h1>
-    <div>
-    <h2>Sign Up</h2>
-    <form @submit.prevent="registerUser">
+  <div>
+    <h2>Sign Up (Hijo de Auth)</h2>
+    <form>
       <div>
         <label for="email">Email:</label>
         <input type="email" id="email" v-model="email" required>
@@ -15,22 +14,22 @@
         <label for="confirm-password">Confirm Password:</label>
         <input type="password" id="confirm-password" v-model="confirmPassword" required>
       </div>
-      <button @click="handleSignUp" type="submit">Register</button>
+      <button @click="handleSignUp" type="button">Register</button>
     </form>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions} from 'pinia';
+import { mapState, mapActions } from 'pinia';
 import userStore from '@/stores/user.js';
 
 export default {
-    name: 'SignUpView',
-    data() {
+  name: 'SignUpView',
+  data() {
     return {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     }
   },
   computed: {
@@ -38,16 +37,24 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ['registerUser']),
-    handleSignUp() {
+    async handleSignUp() {
+      try {
+        if (this.password !== this.confirmPassword) {
+          throw new Error('Las contraseñas no coinciden');
+        }
         const userData = {
-            email: email.value,
-            password: password.value,
+          email: this.email,
+          password: this.password,
         };
-        this.registerUser(userData.email, userData.password)
-    }
+        await this.registerUser(userData.email, userData.password);
+        console.log(this.user)
+        this.$router.push({ name: 'home' })
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
+};
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,6 +1,6 @@
 <template>
-    <h1>Sign In View (Hijo de Auth)</h1>
     <div>
+    <h1>Sign In View (Hijo de Auth)</h1>
     <form>
       <label for="email">Email</label>
       <input type="email" id="email" v-model="email">
@@ -8,12 +8,15 @@
       <label for="password">Password</label>
       <input type="password" id="password" v-model="password">
       
-      <button type="submit" @click.prevent="signIn">Sign In</button>
+      <button type="button" @click.prevent="_handleSignIn">Sign In</button>
     </form>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia';
+import userStore from '@/stores/user.js';
+
 export default {
     name: 'SignInView',
     data() {
@@ -22,10 +25,23 @@ export default {
             password: ''
         }
     },
-    methots: {
-        signIn() {
-            // Implementar mi lógica de SignIn aquí
-        }
+    computed: {
+        ...mapState(userStore, ['user']),
+    },
+    methods: {
+        ...mapActions(userStore, ['signIn']),
+        async _handleSignIn() {
+            try {
+                const userData = {
+                    email: this.email,
+                    password: this.password,
+                };
+            await this.signIn(userData);
+            this.$router.push({ name: 'home' })
+            } catch(err) {
+                console.error(err)
+            }
+        },
     }
 }
 </script>

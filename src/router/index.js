@@ -13,7 +13,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/auth',
@@ -37,17 +40,27 @@ const router = createRouter({
       name: 'contact',
       component: ContactUsView,
     },
-  ]
+  ],
 })
 
+router.beforeEach(async (to) => {
+  const { name, meta } = to
+  const store = UserStore();
+  await store.fetchUser();
 
-router.beforeEach((to) => {
-  const useUserStore = UserStore() //me traigo la función
-  const isLoginIn = useUserStore.user !== null; //de mi Store mira el objeto user de mi Estado y me dices si es diferente de null: Tengo usuario
+  const { user } = store
+  console.log(user)
 
-  if(!isLoginIn && to.name !== 'signIn' && to.name !== 'signUp' && to.name !== 'contact') {
+  if(meta.requiresAuth && user === null){
     return {name: 'signIn'}
+  } 
+
+  if((name === 'signIn' || name === 'signUp') && user !== null) {
+    return {name:'home'}
   }
+
 })
+
+
 
 export default router
