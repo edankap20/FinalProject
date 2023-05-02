@@ -1,8 +1,13 @@
 <script>
 import userStore from '@/stores/user.js';
 import { mapActions, mapState } from 'pinia';
+
+import MyTable from '@/components/MyTable.vue'
   export default {
-    name: "HomeView", 
+    name: "HomeView",
+    components: {
+      MyTable
+    },
     data () {
       return {}
     }, 
@@ -27,5 +32,6 @@ import { mapActions, mapState } from 'pinia';
   <main>
     <h1>Home View (para ver algo)</h1>
     <button @click="_handleLogOut">Log Out</button>
+    <MyTable />
   </main>
 </template>
