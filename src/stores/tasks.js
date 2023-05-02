@@ -5,14 +5,13 @@ export default defineStore('tasks', {
   state() {
     return {
       tasksList: [],
-      completedTaskList: [],
     }
   },
   actions: {
     async _fetchAllTasks() {
       const { data, error } = await supabase
-      .from('tasks')
-      .select()
+        .from('tasks')
+        .select()
 
       if (error) throw error;
       console.log(data)
@@ -44,33 +43,29 @@ export default defineStore('tasks', {
       })
     },
     async _completeTask(task) {
-      const { data, error} = await supabase
+      const { error} = await supabase
         .from('tasks')
         .update({ is_complete: true })
-        .eq('id', task.id)
-        .select()
+        .eq('id', task.id);
 
         if (error) throw error;
 
-        const [updatedTask] = data;
-        task.is_complete = updatedTask.is_complete;
-        this.tasksList = this.tasksList.filter(todo => todo.id !== task.id);
-
+        const index = this.tasksList.findIndex(todo => todo.id === task.id)
+        if (index !== -1) {
+          this.tasksList[index].is_complete = true;
+        }
     },
     async _incompleteTask({ id }) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('tasks')
         .update({ is_complete: false })
-        .eq('id', id)
-        .select()
+        .eq('id', id);
     
       if (error) throw error;
-    
-      const [task] = data;
-      const index = this.completedTaskList.findIndex(todo => todo.id === task.id)
+
+      const index = this.tasksList.findIndex(todo => todo.id === id)
       if (index !== -1) {
-        this.completedTaskList.splice(index, 1)
-        this.tasksList.push(task)
+        this.tasksList[index].is_complete = false;
       }
     },
     async _eraseTask(id) {
@@ -80,6 +75,7 @@ export default defineStore('tasks', {
           .eq('id', id)
         
         if (error) throw error;
+        this.tasksList = this.tasksList.filter(task => task.id !== id);
     },
     async _fetchTasks() {
       try {
@@ -88,8 +84,7 @@ export default defineStore('tasks', {
               .select()
               .order('inserted_at', { ascending: false });
           if (error) throw error;
-          this.tasksList = tasks.filter(todo => !todo.is_complete);
-          this.completedTaskList = tasks.filter(todo => todo.is_complete);
+          this.tasksList = tasks;
       } catch (err) {
           console.error(err);
       }

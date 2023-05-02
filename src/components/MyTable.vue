@@ -15,7 +15,12 @@ export default {
     computed: {
         ...mapState(TodoStore, ['tasksList']),
         ...mapState(UserStore, ['user']),
-        ...mapState(TodoStore, ['completedTaskList']),
+        completedTaskList() {
+            return this.tasksList.filter(task => task.is_complete);
+        },
+        uncompletedTaskList() {
+            return this.tasksList.filter(task => !task.is_complete);
+        },
     },
     methods: {
         ...mapActions(TodoStore, ['_fetchAllTasks', '_addNewTask', '_editTask', '_completeTask', '_incompleteTask', '_eraseTask', '_fetchTasks']),
@@ -44,12 +49,10 @@ export default {
         async _handleCompleteTask(todo) {
             try {
                 await this._completeTask({ id: todo.id })
-                todo.is_complete = true
-                this.completedTaskList.push(todo);
+                todo.is_complete = true;
             } catch (err) {
                 console.error(err)
             }
-            /*             this._fetchAllTasks() */
         },
         async _handleIncompleteTask(todo) {
             try {
@@ -60,8 +63,7 @@ export default {
         },
         async _handleEraseTask(todo) {
             try {
-                await this._eraseTask(todo.id)
-                await this._fetchTasks();
+                await this._eraseTask(todo.id);
             } catch (err) {
                 console.error(err)
             }
@@ -80,24 +82,7 @@ export default {
 
 <template>
     <div>
-        <!--         <h1>Lista de tareas</h1>
-        <div v-for="todo in tasksList" :key="todo.id">
-            <p>{{ todo.title }}</p>
-            <span>{{ todo.is_complete ? '✅' : '❌' }}</span>
-            <button @click="_handleCompleteTask(todo)">Complete!</button>
-            <button @click="_handleEditTask(todo)">Update</button>
-            <button @click="_handleEraseTask(todo)">Erase</button>
-        </div> -->
 
-        <h1>-----------------------</h1>
-<!--         <h1>Completed Tasks</h1>
-        <div v-for="todo in completedTaskList" :key="todo.id">
-            <p>{{ todo.title }}</p>
-            <span>{{ todo.is_complete ? '✅' : '❌' }}</span>
-            <button @click="_handleIncompleteTask(todo)">Incomplete</button>
-            <button @click="_handleEraseTask(todo)">Erase</button>
-        </div> -->
-        <h1>----------------------</h1>
         <div v-if="!updatingTask">
             <input type="text" v-model="newTaskTitle">
             <button @click="_handleNewTask">Add new task</button>
@@ -115,9 +100,9 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="todo in tasksList" :key="todo.id">
+                <tr v-for="todo in uncompletedTaskList" :key="todo.id">
                     <td>{{ todo.title }}</td>
-                    <td>{{ todo.is_complete ? '✅' : '❌' }}</td>
+                    <td>{{ '❌' }}</td>
                     <td>
                         <button @click="_handleCompleteTask(todo)">Complete!</button>
                         <button @click="_handleEditTask(todo)">Update</button>
@@ -134,14 +119,14 @@ export default {
                 <table>
                     <thead>
                         <tr>
-                            <th>Todos</th>
+                            <th>DoneTasks</th>
                             <th>State</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="todo in completedTaskList" :key="todo.id">
                             <td>{{ todo.title }}</td>
-                            <td>{{ todo.is_complete ? '✅' : '❌' }}</td>
+                            <td>{{ '✅' }}</td>
                             <td>
                                 <button @click="_handleIncompleteTask(todo)">Incomplete</button>
                                 <button @click="_handleEraseTask(todo)">Erase</button>
