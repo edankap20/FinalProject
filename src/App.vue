@@ -150,7 +150,7 @@ export default {
     <button class="navbar-toggler" type="button" @click="toggleMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" :class="{ show: menuOpen }">
+    <div class="collapse navbar-collapse ml-4" :class="{ show: menuOpen }">
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link class="nav-link" @click="closeMenu" to="/auth/sign-in">Sign In</router-link>
