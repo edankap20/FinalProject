@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Sign Up (Hijo de Auth)</h2>
+    <h1>Sign Up (Hijo de Auth)</h1>
     <form>
       <div>
         <label for="email">Email:</label>

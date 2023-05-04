@@ -1,5 +1,5 @@
 <template>
-    <h1>Contact Us (ejemplo para poder implementarlo)</h1>
+    <h1>Contact Us</h1>
 </template>
 
 
@@ -7,10 +7,8 @@
 export default {
     name: 'ContactUsView',
 }
-
 </script>
 
 
 <style>
-
 </style>

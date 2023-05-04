@@ -30,8 +30,8 @@ import MyTable from '@/components/MyTable.vue'
 
 <template>
   <main>
-    <h1>Home View (para ver algo)</h1>
-    <button @click="_handleLogOut">Log Out</button>
+    <h1>Home View</h1>
+    <button class="btn btn-secondary font-50" @click="_handleLogOut">Log Out</button>
     <MyTable />
   </main>
 </template>
