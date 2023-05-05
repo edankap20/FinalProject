@@ -17,7 +17,7 @@
             <div class="card-body py-5 px-md-5">
 
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-xxl-8">
                         <h2 class="fw-bold mb-5">Sign In</h2>
                         <form>
 

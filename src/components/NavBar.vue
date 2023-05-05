@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Home</v-toolbar-title>
@@ -57,4 +57,4 @@
       }
     }
   }
-  </script>
+  </script> -->
