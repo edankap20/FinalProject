@@ -1,5 +1,4 @@
 <template>
-    <h1>AuthView</h1>
     <RouterView />
 </template>
 
@@ -13,5 +12,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
