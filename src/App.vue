@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-xxl navbar-light bg-light">
+  <nav id="laptop-view" class="navbar navbar-expand-xxl navbar-light bg-light">
     <router-link class="nav-link" @click="closeMenu" style="font-size: 2em" to="/">Home</router-link>
     <div class="ml-auto d-xxl-flex align-items-center" id="lista">
       <ul class="navbar-nav ">
@@ -8,9 +8,6 @@
         </li>
         <li class="nav-item">
           <router-link class="nav-link" @click="closeMenu" to="/auth/sign-up">Sign Up</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" @click="closeMenu" to="/contact">Contact Us</router-link>
         </li>
       </ul>
     </div>
@@ -24,9 +21,6 @@
         </li>
         <li class="nav-item">
           <router-link class="nav-link" @click="closeMenu" to="/auth/sign-up">Sign Up</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" @click="closeMenu" to="/contact">Contact Us</router-link>
         </li>
       </ul>
     </div>
@@ -86,9 +80,8 @@ export default {
   }
 }
 @media (min-width: 1024px) {
-#app {
+#laptop-view {
     display: block;
-    /* grid-template-columns: 1fr 1fr; */
     padding: 0 2rem;
     position: absolute;
     top: 0;

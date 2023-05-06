@@ -1,37 +1,78 @@
+<template>
+  <main>
+    <!-- Section: Design Block -->
+    <section class="text-center">
+      <!-- Background image -->
+      <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 200px;
+        "></div>
+      <!-- Background image -->
+
+      <div class="card mx-4 mx-md-5 shadow" style="
+        margin-top: -123px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+        <div class="card-body py-5 px-md-5">
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+              <h2 class="fw-bold mb-5">Your tasks and more..</h2>
+              <MyTable />
+              <div id="button">
+                <button class="btn btn-danger font-50 btn-sm" @click="_handleLogOut">Log Out</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section: Design Block -->
+
+
+
+  </main>
+</template>
+
 <script>
 import userStore from '@/stores/user.js';
 import { mapActions, mapState } from 'pinia';
 
 import MyTable from '@/components/MyTable.vue'
-  export default {
-    name: "HomeView",
-    components: {
-      MyTable
-    },
-    data () {
-      return {}
-    }, 
-    computed: {
-      ...mapState(userStore, ['user']),
-    },
-    methods: {
-      ...mapActions(userStore, ['signOut']),
-      async _handleLogOut() {
-        try {
-          await this.signOut()
-          this.$router.push({ name: 'signIn' })
-        } catch(err) {
-          console.error(err)
-        }
+export default {
+  name: "HomeView",
+  components: {
+    MyTable
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapState(userStore, ['user']),
+  },
+  methods: {
+    ...mapActions(userStore, ['signOut']),
+    async _handleLogOut() {
+      try {
+        await this.signOut()
+        this.$router.push({ name: 'signIn' })
+      } catch (err) {
+        console.error(err)
       }
     }
   }
+}
 </script>
 
-<template>
-  <main>
-    <h1>Home View</h1>
-    <button class="btn btn-secondary font-50" @click="_handleLogOut">Log Out</button>
-    <MyTable />
-  </main>
-</template>
+<style scoped>
+#button {
+  display: flex;
+  justify-content: center;
+}
+
+h3 {
+  margin-left: 1rem;
+}
+</style>
+
