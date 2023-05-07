@@ -206,4 +206,107 @@ export default {
         font-weight: bold;
     }
 }
+@media (min-width: 426px) {
+    #new-task {
+        margin: 0rem 1rem 3rem;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .table-task {
+        margin-top: 2rem;
+    }
+
+    .table-Complete-Task {
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .action-button {
+        margin-right: 1rem;
+        font-size: large;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        table-layout: fixed;
+        background-color: white;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+}
+@media (min-width: 992) {
+    #new-task {
+        margin: 0rem 1rem 3rem;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .table-task {
+        margin-top: 2rem;
+    }
+
+    .table-Complete-Task {
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .action-button {
+        margin-right: 1rem;
+        font-size: large;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        table-layout: fixed;
+        background-color: white;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    @media (min-width: 1024px) {
+        color: ;
+    }
+}
+
 </style>
