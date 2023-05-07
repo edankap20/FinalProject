@@ -3,14 +3,17 @@
     <!-- Section: Design Block -->
     <section class="text-center">
       <!-- Background image -->
-      <div class="p-5 bg-image" style="
+      <div class="p-5 bg-image"   style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-        height: 200px;
+        background-position: center;
+        background-size: cover;
+        
+/*         height: 300px; */
         "></div>
       <!-- Background image -->
 
-      <div class="card mx-4 mx-md-5 shadow" style="
-        margin-top: -123px;
+      <div class="card mx-3 mx-md-5 shadow" id="card" style="
+
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
         ">
@@ -70,9 +73,32 @@ export default {
   display: flex;
   justify-content: center;
 }
+@media (max-width: 1024px) {
+  .bg-image {
+  background-size: cover;
+      background-position: center;
+      height: 200px;
+ }
+ #card{
+  margin-top: 5rem;
+  margin-top: -150px;
+ }
+}
 
-h3 {
-  margin-left: 1rem;
+
+
+@media (min-width: 1024px) {
+ .bg-image {
+  background-size: cover;
+      background-position: center;
+      height: 300px;
+ }
+ #card{
+  margin-top: 5rem;
+  margin-top: -170px;
+  
+ }
+
 }
 </style>
 
