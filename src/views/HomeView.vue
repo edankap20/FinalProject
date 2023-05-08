@@ -29,9 +29,6 @@
       </div>
     </section>
     <!-- Section: Design Block -->
-
-
-
   </main>
 </template>
 
@@ -77,31 +74,23 @@ export default {
     background-position: center;
     height: 200px;
   }
-
   #card {
     margin-top: 5rem;
     margin-top: -150px;
   }
 }
 
-
-
 @media (min-width: 1024px) {
   .bg-image {
     background-size: cover;
     background-position: center;
     height: 300px;
-
   }
-
   #bg-image {
     margin-top: -123px;
   }
-
   #card {
-    margin-top: 5rem;
     margin-top: -170px;
   }
-
 }</style>
 

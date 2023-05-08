@@ -2,7 +2,7 @@
 <!-- Section: Design Block -->
 <section class="text-center">
   <!-- Background image -->
-  <div class="p-5 bg-image" style="
+  <div class="p-5 bg-image" id="bg-image" style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
         height: 300px;
         background-position: center;
@@ -10,7 +10,7 @@
         "></div>
   <!-- Background image -->
 
-  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+  <div class="card mx-4 mx-md-5 shadow" style="
         margin-top: -100px;
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
@@ -18,7 +18,7 @@
     <div class="card-body py-5 px-md-5">
 
       <div class="row d-flex justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
           <h2 class="fw-bold mb-5">Sign Up Now</h2>
           <form>
             <!-- Email input -->
@@ -95,5 +95,9 @@ export default {
 </script>
 
 <style scoped>
-
+@media (min-width: 1024px) {
+    #bg-image {
+        margin-top: -400px;
+    }
+}
 </style>

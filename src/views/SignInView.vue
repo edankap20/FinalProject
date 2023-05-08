@@ -1,11 +1,10 @@
 <template>
-    <!-- Section: Design Block -->
-    <section class="text-center">
+      <main>
+        <section class="text-center">
         <!-- Background image -->
         <div class="p-5 bg-image" id="bg-image" style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
         height: 300px;
-        width: auto;
         background-position: center;
         background-size: cover;
         "></div>
@@ -19,37 +18,32 @@
             <div class="card-body py-5 px-md-5">
 
                 <div class="row d-flex justify-content-center">
-                    <div class="col-xxl-8">
+                    <div class="col-lg-7">
                         <h2 class="fw-bold mb-5">Sign In</h2>
                         <form>
 
-                            <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <input type="email" id="email" class="form-control" v-model="email">
                                 <label class="form-label" for="email">Email address</label>
                             </div>
 
-                            <!-- Password input -->
                             <div class="form-outline mb-4">
                                 <input type="password" id="password" class="form-control" v-model="password">
                                 <label class="form-label" for="password">Password</label>
                             </div>
 
-                            <!-- Submit button -->
                             <button type="button" class="btn btn-primary btn-block mb-4" @click.prevent="_handleSignIn">
                                 Sign in
                             </button>
-                            <!-- Register buttons -->
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+    </main>
 </template>
-
-
-
 
 
 <script>
@@ -87,17 +81,8 @@ export default {
 
 <style scoped>
 @media (min-width: 1024px) {
-    .bg-image {
-        background-size: cover;
-        background-position: center;
-        height: 300px;
-    }
-
     #bg-image {
-        margin-top: -495px;
-        background-size: cover;
-        background-position: center;
-        height: 300px;
+        margin-top: -490px;
     }
 }
 </style>

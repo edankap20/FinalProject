@@ -26,7 +26,7 @@
     </div>
   </nav>
   <RouterView />
-  <footer id="footer-botton">
+  <footer id="footer-botton" >
     <div class="container-fluid">
       <div class="container text-center">
         <h6>Made by Johan with the power of</h6>
@@ -68,8 +68,9 @@ export default {
 </script>
 
 <style>
+
 #footer-botton{
-  position: absolute;
+position: inherit;
     bottom: 0;
     right: 0;
     margin: 0;
@@ -169,6 +170,14 @@ h7 {
 }
 
 @media (min-width: 1024px) {
+  #footer-botton{
+position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
   #laptop-view {
     position: absolute;
     top: 0;
