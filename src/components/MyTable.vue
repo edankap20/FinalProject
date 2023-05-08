@@ -303,10 +303,6 @@ export default {
         background-color: #f2f2f2;
         font-weight: bold;
     }
-
-    @media (min-width: 1024px) {
-        color: ;
-    }
 }
 
 </style>

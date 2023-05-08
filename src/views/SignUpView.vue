@@ -5,6 +5,8 @@
   <div class="p-5 bg-image" style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
         height: 300px;
+        background-position: center;
+        background-size: cover;
         "></div>
   <!-- Background image -->
 
@@ -92,4 +94,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+</style>

@@ -2,14 +2,16 @@
     <!-- Section: Design Block -->
     <section class="text-center">
         <!-- Background image -->
-        <div class="p-5 bg-image" style="
+        <div class="p-5 bg-image" id="bg-image" style="
         background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
         height: 300px;
         width: auto;
+        background-position: center;
+        background-size: cover;
         "></div>
         <!-- Background image -->
 
-        <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        <div class="card mx-4 mx-md-5 shadow" id="card" style="
         margin-top: -100px;
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
@@ -83,4 +85,19 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+@media (min-width: 1024px) {
+    .bg-image {
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+    }
+
+    #bg-image {
+        margin-top: -495px;
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+    }
+}
+</style>
