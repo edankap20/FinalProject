@@ -5,14 +5,14 @@
       <div class="ml-auto d-xxl-flex align-items-center" id="lista">
         <ul class="navbar-nav ">
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeMenu" to="/auth/sign-in">Sign In</router-link>
+            <router-link v-if="!user" class="nav-link" @click="closeMenu" to="/auth/sign-in">Sign In</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeMenu" to="/auth/sign-up">Sign Up</router-link>
+            <router-link v-if="!user" class="nav-link" @click="closeMenu" to="/auth/sign-up">Sign Up</router-link>
           </li>
         </ul>
       </div>
-      <button class="navbar-toggler" type="button" @click="toggleMenu">
+      <button v-if="!user" class="navbar-toggler" type="button" @click="toggleMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div v-if="!user" class="collapse navbar-collapse ml-4" :class="{ show: menuOpen }">

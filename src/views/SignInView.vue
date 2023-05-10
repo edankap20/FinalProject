@@ -8,7 +8,9 @@
                         <div class="col-lg-7">
                             <h2 class="fw-bold mb-5">Sign In</h2>
 
-                            <form class="needs-validation was-validated" novalidate>
+                            <!-- <form class="needs-validation was-validated" novalidate> -->
+                                <form class="needs-validation" v-bind:class="{ 'was-validated': formSubmitted }" novalidate>
+                                
                                 <div class="form-outline mb-4">
                                     <input type="email" id="email" class="form-control" v-model="email" required />
                                     <label class="form-label" for="email">Email address</label>
@@ -35,23 +37,25 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import userStore from '@/stores/user.js'
-/* import FooterStick from '@/components/FooterStick.vue'; */
 export default {
     name: 'SignInView',
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            //
+            formSubmitted: false,
         }
     },
-    /*     components: {
-                FooterStick,
-            }, */
     computed: {
         ...mapState(userStore, ['user'])
     },
     methods: {
         ...mapActions(userStore, ['signIn']),
+        //
+        submitForm() {
+            this.formSubmitted = true;
+        },
         async _handleSignIn() {
             try {
                 const userData = {
