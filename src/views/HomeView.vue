@@ -5,7 +5,7 @@
       <div class="card mx-3 mx-md-5 shadow" id="card">
         <div class="card-body py-5 px-md-5">
           <div class="row d-flex justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
               <h2 class="fw-bold mb-5">Your tasks and more..</h2>
               <MyTable />
               <div id="button">
