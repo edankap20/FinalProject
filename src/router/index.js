@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AuthView from '@/views/AuthView.vue'
-import ContactUsView from '@/views/ContactUsView.vue'
 import SignInView from '@/views/SignInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import UserStore from '@/stores/user.js'
@@ -13,7 +12,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/auth',
@@ -32,21 +34,27 @@ const router = createRouter({
         },
       ]
     },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: ContactUsView,
-    },
-  ]
+  ],
 })
 
-router.beforeEach((to) => {
-  const useUserStore = UserStore()
-  const isLoginIn = useUserStore.user !== null;
+router.beforeEach(async (to) => {
+  const { name, meta } = to
+  const store = UserStore();
+  await store.fetchUser();
 
-  if(!isLoginIn && to.name !== 'signIn' && to.name !== 'signUp' && to.name !== 'contact') {
+  const { user } = store
+  console.log(user)
+
+  if(meta.requiresAuth && user === null){
     return {name: 'signIn'}
+  } 
+
+  if((name === 'signIn' || name === 'signUp') && user !== null) {
+    return {name:'home'}
   }
+
 })
+
+
 
 export default router

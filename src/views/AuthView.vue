@@ -1,5 +1,4 @@
 <template>
-    <h1>AuthView (Simplemente algo)</h1>
     <RouterView />
 </template>
 
