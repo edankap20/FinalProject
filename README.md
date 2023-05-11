@@ -64,6 +64,7 @@ La estructura del proyecto es como sigue:
 │   │   ├── SignInView.vue
 │   │   └── SignUpView.vue
 ├── App.vue
+├── main.js
 └── vite.config.js
 ```
 En la App.vue se desplega todo y tenemos RouterView que muestra lo que tenemos en la carpeta Views. Para ello se necesita de la carpeta Router donde se almacenará el archivo .js con las rutas. Los componentes que hay dentro de la carpeta son los mismos que están en la carpeta Views para que se pueda hacer el Router_link correspondiente allí donde queremos que aparezca dentro de la App.Vue.
