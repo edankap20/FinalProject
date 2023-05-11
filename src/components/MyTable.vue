@@ -1,3 +1,78 @@
+<template>
+    <div class="main-container">
+
+        <div v-if="!updatingTask" id="new-task">
+            <div class="input-group mb-3 input-group-lg shadow">
+                <input type="text" class="form-control" placeholder="Any new task?" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" v-model="newTaskTitle">
+                <button @click="_handleNewTask" class="btn btn-primary" type="button" id="button-addon2">Add</button>
+            </div>
+        </div>
+        <div v-else id="new-task">
+            <div class="input-group mb-3 input-group-lg">
+                <input type="text" class="form-control" placeholder="Any new task?" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" v-model="updateTaskTitle">
+                <button @click="_handleUpdateTask" class="btn btn-primary" type="button" id="button-addon2">Update</button>
+            </div>
+        </div>
+
+
+        <div class="table-task">
+            <h1>Tasks</h1>
+            <div class="table-container shadow-lg p-3 mb-5 bg-body rounded">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Todos</th>
+                            <th>State</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="todo in uncompletedTaskList" :key="todo.id">
+                            <td>{{ todo.title }}</td>
+                            <td>{{ '❌' }}</td>
+                            <td>
+                                <button class="action-button" @click="_handleCompleteTask(todo)">✅</button>
+                                <button class="action-button" @click="_handleEditTask(todo)">📝</button>
+                                <button class="action-button" @click="_handleEraseTask(todo)">🚮</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="table-Complete-Task">
+            <h1>Completed Tasks</h1>
+            <div class="table-container shadow-lg p-3 mb-5 bg-body rounded">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Todos</th>
+                            <th>State</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="todo in completedTaskList" :key="todo.id">
+                            <td>{{ todo.title }}</td>
+                            <td>{{ '✅' }}</td>
+                            <td>
+                                <button class="action-button" @click="_handleIncompleteTask(todo)">🔄</button>
+                                <button class="action-button" @click="_handleEraseTask(todo)">🚮</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</template>
+
 <script>
 import { mapState, mapActions } from 'pinia';
 import TodoStore from '@/stores/tasks.js';
@@ -75,85 +150,8 @@ export default {
         this._fetchAllTasks()
     },
 }
-
-
-
 </script>
 
-<template>
-    <div class="main-container">
-
-        <div v-if="!updatingTask" id="new-task">
-            <div class="input-group mb-3 input-group-lg shadow">
-                <input type="text" class="form-control" placeholder="Any new task?" aria-label="Recipient's username"
-                    aria-describedby="button-addon2" v-model="newTaskTitle">
-                <button @click="_handleNewTask" class="btn btn-primary" type="button" id="button-addon2">Add</button>
-            </div>
-        </div>
-        <div v-else id="new-task">
-            <div class="input-group mb-3 input-group-lg">
-                <input type="text" class="form-control" placeholder="Any new task?" aria-label="Recipient's username"
-                    aria-describedby="button-addon2" v-model="updateTaskTitle">
-                <button @click="_handleUpdateTask" class="btn btn-primary" type="button" id="button-addon2">Update</button>
-            </div>
-        </div>
-
-
-        <div class="table-task">
-            <h1>Tasks</h1>
-            <div class="table-container shadow-lg p-3 mb-5 bg-body rounded">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Todos</th>
-                            <th>State</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="todo in uncompletedTaskList" :key="todo.id">
-                            <td>{{ todo.title }}</td>
-                            <td>{{ '❌' }}</td>
-                            <td>
-                                <button class="action-button" @click="_handleCompleteTask(todo)">✅</button>
-                                <button class="action-button" @click="_handleEditTask(todo)">📝</button>
-                                <button class="action-button" @click="_handleEraseTask(todo)">🚮</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-
-        <div class="table-Complete-Task">
-            <h1>Completed Tasks</h1>
-            <div class="table-container shadow-lg p-3 mb-5 bg-body rounded">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Todos</th>
-                            <th>State</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="todo in completedTaskList" :key="todo.id">
-                            <td>{{ todo.title }}</td>
-                            <td>{{ '✅' }}</td>
-                            <td>
-                                <button class="action-button" @click="_handleIncompleteTask(todo)">🔄</button>
-                                <button class="action-button" @click="_handleEraseTask(todo)">🚮</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-</template>
 
 <style scoped>
 @media (max-width: 425px) {
