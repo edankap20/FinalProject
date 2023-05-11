@@ -8,23 +8,27 @@
                         <div class="col-lg-7">
                             <h2 class="fw-bold mb-5">Sign In</h2>
 
-                            <!-- <form class="needs-validation was-validated" novalidate> -->
-                                <form class="needs-validation" v-bind:class="{ 'was-validated': formSubmitted }" novalidate>
-                                
+                            <!-- Muy importante trabajar con @submit.preven en lugar de @click.prevent pues 
+                                sino no funciona handleSignIn. Además esté evento tiene que estar en 
+                                "form" sino tampoco funciona para la validación de formularios con Bootstrap5 -->
+                            <form class="needs-validation" novalidate @submit.prevent="_handleSignIn">
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="email" class="form-control" v-model="email" required />
                                     <label class="form-label" for="email">Email address</label>
+                                    <input type="email" id="email" class="form-control" v-model="email" required />
                                     <div class="invalid-feedback">Please provide a valid Email.</div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password" class="form-control" v-model="password" required />
                                     <label class="form-label" for="password">Password</label>
+                                    <input type="password" id="password" class="form-control" v-model="password" required />
+                                    <div class="invalid-feedback">Please provide a valid Password.</div>
                                 </div>
 
-                                <button type="button" class="btn btn-primary btn-block mb-4" @click.prevent="_handleSignIn">
-                                    Sign in
-                                </button>
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                                <div v-if="showInvalidCredentials" class="alert alert-danger" role="alert">
+                                    Invalid credentials. Please try again.
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -43,8 +47,7 @@ export default {
         return {
             email: '',
             password: '',
-            //
-            formSubmitted: false,
+            showInvalidCredentials: false
         }
     },
     computed: {
@@ -52,24 +55,53 @@ export default {
     },
     methods: {
         ...mapActions(userStore, ['signIn']),
-        //
-        submitForm() {
-            this.formSubmitted = true;
-        },
         async _handleSignIn() {
-            try {
-                const userData = {
-                    email: this.email,
-                    password: this.password
+            if (this.email && this.password) {
+                try {
+                    const userData = {
+                        email: this.email,
+                        password: this.password
+                    }
+                    await this.signIn(userData)
+                    this.$router.push({ name: 'home' })
+                } catch (err) {
+                    console.error(err)
+                    /*  alert('Invalid Credentials') */
+                    this.showInvalidCredentials = true
+                    this.clearFormFields()
                 }
-                await this.signIn(userData)
-                this.$router.push({ name: 'home' })
-            } catch (err) {
-                console.error(err)
             }
+        },
+        clearFormFields() {
+            this.email = ''
+            this.password = ''
         }
+    },
+    mounted() {
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        ; (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener(
+                    'submit',
+                    function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    },
+                    false
+                )
+            })
+        })()
     }
-}
+}  
 </script>
 
 <style scoped>

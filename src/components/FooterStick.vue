@@ -26,6 +26,7 @@
     export default {
             name: 'FooterStick',
     }
+    
 </script>
 
 <style scoped>
